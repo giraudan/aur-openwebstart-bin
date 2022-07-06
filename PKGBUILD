@@ -33,23 +33,21 @@ source=(
 md5sums=(
 	"43de50969e877cb5b7e56a97da2e2cdd"
 	"551218dd79f7600755d76ab733fdb5bc"
-	"325214a1c96b12461190320cd2201bf7"
+	"2356480ee0cdd907bb2065de4edbbbf7"
 	"1443e7e283bbf7461e9829eeffd5966a"
 )
 validpgpkeys=()
 
 package() {
 	bsdtar -xf data.tar.gz -C "$pkgdir/"
-	mkdir -p $pkgdir/usr/local/bin/
+	mkdir -p $pkgdir/usr/bin/
 	mkdir -p $pkgdir/usr/share/applications/
 	mkdir -p $pkgdir/usr/share/mime/packages/
-
-	ln -sf "$pkgdir/opt/OpenWebStart/itw-settings" "$pkgdir/usr/local/bin/"
-	ln -sf "$pkgdir/opt/OpenWebStart/javaws" "$pkgdir/usr/local/bin/"
 
 	install -Dm644 jnlp.xml $pkgdir/usr/share/mime/packages
 	install -Dm755 javaws.desktop $pkgdir/usr/share/applications
 	install -Dm755 itw-settings.desktop $pkgdir/usr/share/applications
+	ln -sf /opt/OpenWebStart/javaws ${pkgdir}/usr/bin/javaws
+	ln -sf /opt/OpenWebStart/itw-settings ${pkgdir}/usr/bin/itw-settings
 }
-
 
